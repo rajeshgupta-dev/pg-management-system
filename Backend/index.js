@@ -1,12 +1,14 @@
 const express = require("express");
 const connectDB = require("./config/db");
+const cors = require("cors")
 
 const dotenv = require("dotenv");
-const router = require("./MCR/routes/admin_route");
 dotenv.config()
+const router = require("./MCR/routes/admin_route");
+
 const app = express();
 app.use(express.json());
-
+app.use(cors())
 app.use("/api/v1", router)
 
 
