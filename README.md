@@ -1,0 +1,1 @@
+A full-stack PG Management System web application built using the MERN stack that helps PG owners manage rooms, tenants, rent, and complaints efficiently, while allowing tenants to view details, pay rent, and raise issues online.
