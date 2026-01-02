@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from "axios"
 import { ToastContainer, toast, Bounce } from 'react-toastify';
+import ReactLoading from 'react-loading';
 
 
 const AdminRegister = () => {
@@ -9,9 +10,11 @@ const AdminRegister = () => {
     email: '',
     password: ''
   });
+  const [loading, setLoading] = useState(false);
 
 
   async function handleRegister() {
+    setLoading(true)
     try {
       let res = await axios.post("http://localhost:5000/api/v1/admin/register", data);
       setData({
@@ -43,6 +46,8 @@ const AdminRegister = () => {
         theme: "light",
         transition: Bounce,
       });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -79,7 +84,7 @@ const AdminRegister = () => {
             value={data.password}
             onChange={handleInputChange}
           />
-          <button onClick={handleRegister}>Register</button>
+          <button onClick={handleRegister}>{loading ? "Loading..." : "Register"}</button>
         </div>
       </div>
       <ToastContainer
