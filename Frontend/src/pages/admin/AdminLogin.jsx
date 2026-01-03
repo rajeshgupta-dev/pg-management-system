@@ -5,9 +5,8 @@ import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 
 
-const AdminRegister = () => {
+const AdminLogin = () => {
   const [data, setData] = useState({
-    name: '',
     email: '',
     password: ''
   });
@@ -17,7 +16,7 @@ const AdminRegister = () => {
 
 
   async function handleRegister() {
-    if (!data.name || !data.email || !data.password) {
+    if (!data.email || !data.password) {
       setError("all fiedl required")
       setTimeout(() => {
         setError("")
@@ -28,7 +27,6 @@ const AdminRegister = () => {
     try {
       let res = await axios.post("http://localhost:5000/api/v1/admin/register", data);
       setData({
-        name: '',
         email: '',
         password: ''
       });
@@ -74,16 +72,8 @@ const AdminRegister = () => {
   return (
     <div className='min-h-screen flex items-center justify-center bg-amber-100'>
       <div className='bg-white w-full max-w-sm p-4 rounded-lg shadow-md text-center'>
-        <h2 className='mb-2.5 text-2xl'>Admin Register</h2>
+        <h2 className='mb-2.5 text-2xl'>Admin Login</h2>
         <div className='space-y-4'>
-          <input
-            type="text"
-            placeholder="Enter Admin name"
-            name="name"
-            value={data.name}
-            onChange={handleInputChange}
-            className='w-full outline p-1'
-          />
           <input
             type="email"
             placeholder="Enter Email"
@@ -101,7 +91,7 @@ const AdminRegister = () => {
             className='w-full outline p-1'
           />
           <p className='text-red-500'>{error}</p>
-          <button onClick={handleRegister} className=' w-full bg-amber-200 p-1 font-semibold hover:bg-amber-300 cursor-pointer'>{loading ? "Loading..." : "Register"}</button>
+          <button onClick={handleRegister} className=' w-full bg-amber-200 p-1 font-semibold hover:bg-amber-300 cursor-pointer'>{loading ? "Loading..." : "Login"}</button>
         </div>
       </div>
       <ToastContainer
@@ -120,4 +110,4 @@ const AdminRegister = () => {
   );
 }
 
-export default AdminRegister;
+export default AdminLogin;
