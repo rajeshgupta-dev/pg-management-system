@@ -25,7 +25,7 @@ const AdminLogin = () => {
     }
     setLoading(true)
     try {
-      let res = await axios.post("http://localhost:5000/api/v1/admin/register", data);
+      let res = await axios.post("http://localhost:5000/api/v1/admin/login", data);
       setData({
         email: '',
         password: ''
