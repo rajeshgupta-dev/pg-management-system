@@ -33,9 +33,10 @@ const AdminRegister = () => {
         theme: "light",
         transition: Bounce,
       })
+      setLoading(false)
     } catch (error) {
       console.log("Error:", error);
-      toast.error(error.response.data.message, {
+      toast.error(error?.response?.data?.message || "Server Error", {
         position: "bottom-right",
         autoClose: 1000,
         hideProgressBar: false,
