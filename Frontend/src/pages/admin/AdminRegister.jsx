@@ -11,9 +11,17 @@ const AdminRegister = () => {
     password: ''
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("")
 
 
   async function handleRegister() {
+    if (!data.name || !data.email || !data.password) {
+      setError("all fiedl required")
+      setTimeout(() => {
+        setError("")
+      }, 1000)
+      return
+    }
     setLoading(true)
     try {
       let res = await axios.post("http://localhost:5000/api/v1/admin/register", data);
@@ -61,15 +69,17 @@ const AdminRegister = () => {
   }
 
   return (
-    <div>
-      <div>
-        <div>
+    <div className='min-h-screen flex items-center justify-center bg-amber-100'>
+      <div className='bg-white w-full max-w-sm p-4 rounded-lg shadow-md text-center'>
+        <h2 className='mb-2.5 text-2xl'>Admin Register</h2>
+        <div className='space-y-4'>
           <input
             type="text"
             placeholder="Enter Admin name"
             name="name"
             value={data.name}
             onChange={handleInputChange}
+            className='w-full outline p-1'
           />
           <input
             type="email"
@@ -77,6 +87,7 @@ const AdminRegister = () => {
             name="email"
             value={data.email}
             onChange={handleInputChange}
+            className='w-full outline p-1'
           />
           <input
             type="password"
@@ -84,8 +95,10 @@ const AdminRegister = () => {
             name="password"
             value={data.password}
             onChange={handleInputChange}
+            className='w-full outline p-1'
           />
-          <button onClick={handleRegister}>{loading ? "Loading..." : "Register"}</button>
+          <p className='text-red-500'>{error}</p>
+          <button onClick={handleRegister} className=' w-full bg-amber-200 p-1 font-semibold hover:bg-amber-300 cursor-pointer'>{loading ? "Loading..." : "Register"}</button>
         </div>
       </div>
       <ToastContainer
