@@ -1,6 +1,7 @@
 const express = require("express");
 const { register, login } = require("../controllers/admin_controller");
 const delayResponse = require("../../middleware/delayResponse");
+const { authMiddleware } = require("../../middleware/authMiddleware");
 const router = express.Router();
 
 
